@@ -1,0 +1,401 @@
+C:/Prasad/Docker
+
+ssh -i "mydocker.pem" ubuntu@ec2-34-229-218-130.compute-1.amazonaws.com
+
+
+curl -fsSL https://get.docker.com -o install-docker.sh
+sudo sh install-docker.sh
+
+/var/lib/docker/volumes/26801edb7bdb8c9120f117ad612da8b1349e05bb3027f626a6f4aaface1a5905/_data
+/var/lib/docker/volumes/61037e300eeedf9c32fb6453ff87e97fe0a427d7269bcf459bc69d3612b09ede/_data
+
+
+sudo apt-get purge docker-ce -y
+
+sudo sh install-docker.sh
+
+sudo sh install-docker.sh
+
+install-docker.sh
+
+
+root@ip-172-31-23-119:~# docker rmi -f
+1ee494ebb83f
+
+
+DROP TABLE IF EXISTS emp;
+
+CREATE TABLE emp (
+  empno decimal(4,0) NOT NULL,
+  ename varchar(10) default NULL,
+  job varchar(9) default NULL,
+  mgr decimal(4,0) default NULL,
+  hiredate date default NULL,
+  sal decimal(7,2) default NULL,
+  comm decimal(7,2) default NULL,
+  deptno decimal(2,0) default NULL
+);
+
+DROP TABLE IF EXISTS dept;
+
+CREATE TABLE dept (
+  deptno decimal(2,0) default NULL,
+  dname varchar(14) default NULL,
+  loc varchar(13) default NULL
+);
+
+INSERT INTO emp VALUES ('7369','SMITH','CLERK','7902','1980-12-17','800.00',NULL,'20');
+INSERT INTO emp VALUES ('7499','ALLEN','SALESMAN','7698','1981-02-20','1600.00','300.00','30');
+INSERT INTO emp VALUES ('7521','WARD','SALESMAN','7698','1981-02-22','1250.00','500.00','30');
+INSERT INTO emp VALUES ('7566','JONES','MANAGER','7839','1981-04-02','2975.00',NULL,'20');
+INSERT INTO emp VALUES ('7654','MARTIN','SALESMAN','7698','1981-09-28','1250.00','1400.00','30');
+INSERT INTO emp VALUES ('7698','BLAKE','MANAGER','7839','1981-05-01','2850.00',NULL,'30');
+INSERT INTO emp VALUES ('7782','CLARK','MANAGER','7839','1981-06-09','2450.00',NULL,'10');
+INSERT INTO emp VALUES ('7788','SCOTT','ANALYST','7566','1982-12-09','3000.00',NULL,'20');
+INSERT INTO emp VALUES ('7839','KING','PRESIDENT',NULL,'1981-11-17','5000.00',NULL,'10');
+INSERT INTO emp VALUES ('7844','TURNER','SALESMAN','7698','1981-09-08','1500.00','0.00','30');
+INSERT INTO emp VALUES ('7876','ADAMS','CLERK','7788','1983-01-12','1100.00',NULL,'20');
+INSERT INTO emp VALUES ('7900','JAMES','CLERK','7698','1981-12-03','950.00',NULL,'30');
+INSERT INTO emp VALUES ('7902','FORD','ANALYST','7566','1981-12-03','3000.00',NULL,'20');
+INSERT INTO emp VALUES ('7934','MILLER','CLERK','7782','1982-01-23','1300.00',NULL,'10');
+
+INSERT INTO dept VALUES ('10','ACCOUNTING','NEW YORK');
+INSERT INTO dept VALUES ('20','RESEARCH','DALLAS');
+INSERT INTO dept VALUES ('30','SALES','CHICAGO');
+INSERT INTO dept VALUES ('40','OPERATIONS','BOSTON');
+
+
+Canis1lupus2familiarisA
+
+
+
+
+arshyapillai@gmail.com
+
+
+172.18.0.2
+
+
+
+services:
+ mydb:
+  image: mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: intelliqit
+
+ apache:
+  image: httpd
+  ports:
+   - 8989:80
+  links:
+   - mydb:mysql
+
+
+services:
+mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+node:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "8081"
+    ports: # use if it is necessary to expose the container to the host machine
+      - "8001:8001"
+    command: "npm start"
+
+
+
+
+services:
+grafana:
+  image: grafana/grafana:latest
+  ports:
+- ‘3000:3000’
+environment:
+GF_RENDERING_SERVER_URL: http://renderer:8081/render
+GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+GF_LOG_FILTERS: rendering:debug
+renderer:
+image: grafana/grafana-image-renderer:latest
+ports:
+- 8081
+
+
+services:
+  mymongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mkp
+      MONGO_INITDB_ROOT_PASSWORD: mypass
+
+
+  mynode:
+    image: node:8
+    ports:
+      - 8001:8001
+    links:
+      - mymongodb:mongodb
+
+
+
+
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+
+
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 481428124263.dkr.ecr.us-east-1.amazonaws.com
+
+
+
+
+---
+services:
+  mydb:
+    image: mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: mkp
+  apache:
+    image: httpd
+    ports:
+      - 7000:80
+    links:
+      - mydb:mysql
+  php:
+    image: php:7.2-apache
+    links:
+      - mydb:mysql
+      - apache:httpd
+...
+
+kalika peedam deshina baratham
+
+
+
+
+ docker swarm join --token SWMTKN-1-47mkg3q5bjm1wls69vxrbrxgmpjozvm8snxfp1qp68q8v3mk2i-05hwq14mkfosrxqervxfl2obl 172.31.30.27:2377
+ docker swarm join --token SWMTKN-1-46keey13763xqi9oahsb8b4fsipp7iwvu1bn2zpr96rlfx4076-3bgt0mko0nhgv5n23bo7mpg0t 172.31.25.156:2377
+
+
+Manager token
+
+docker swarm join --token SWMTKN-1-47mkg3q5bjm1wls69vxrbrxgmpjozvm8snxfp1qp68q8v3mk2i-4wrnufhv6pvvogsr605u9bdip 172.31.30.27:2377
+
+
+
+
+docker service create  --name webserver -p 8888:80 --replicas 5 --network n1 httpd
+
+
+
+docker swarm join --token SWMTKN-1-4rmyc7udmbvjz8b0ivfv17874swhxywa1edo2m3zaxhzcbjp34-cj43h6jql1by0tx224g13mez5 172.31.83.64:2377
+
+SOCIOLOGY
+
+
+CREATE DOCKER MANAGE 
+==================
+docker swarm init
+
+
+LOAD BALANCE
+=========
+docker node ls
+docker service ls
+docker service ps service_name
+docker service create --name nameassignto_serice options -p -e --replicas 5 service_name 
+docker service rm service_name
+
+SCALLING
+=========
+docker service create --name nameassignto_serice options -p -e --replicas 5 service_name
+docker service scale server_name=8
+docker service rm service_name
+
+ROLLING UPDATE
+==========
+docker service create --name myredis --replicas 4 redis:3
+docker service update --image redis:4 myredis
+
+
+ROLLBACK to a specific version 
+======
+docker service update  --image redis:2 myredis
+
+docker serice rm service_name
+
+
+docker serice rm service_name
+
+"DOCKER SWARM CAN'T HANDLE DOCKER VOLUME, BUT WITH THIRD PART APPLICATION WE CAN ACHIEVE THAT "
+"DOCKER SWARM IS USED FOR STATLESS APPLICATION"
+
+
+
+Quorum  + RAFT
+
+docker serice rm service_name
+
+
+REMOVE A WORKER BY MANAGER
+======================
+docker node update --availability drain worker1
+
+BRING REMOVED WORKER BY MANAGER
+======================
+docker node update --availability actvie worker1
+
+REMOVE A WORKER ITSELFT
+===================
+docer swarm leave
+
+GET THE TOCKER TO ADD A REMVOED WORKER AGAIN
+========================================
+docker swarm join-tocken worker
+
+CREATE A TOCKEN TO CHANGE AN INSTANCE TO A MANAGER
+============================================
+docker swarm join-tocke manager 
+
+CREATE A TOCKEN TO PROMOTE AN EXISTING WORKER TO A MANAGER 
+============================================
+docker node promote worker1
+
+CREATE A TOCKEN TO DEMOTE AN EXISTING WORKER TO A MANAGER 
+============================================
+docker node demote worker1
+
+
+HIGH AVAILABILTIY
+===================
+
+TO REMOVE MANGER BYITSELF (WHERE THERE ARE MANY MANGERS ARE AVAILABLE )
+==================================================
+docker swarm leave --force 
+
+
+CREATE A CUSTOMIZED NETWORK
+=======================
+
+docker network create --driver overlay n1
+
+ADD A NETWORK TO A SERVICE - ROLLING NETWORK UPDATE
+=======================
+docker service update --network-add n1 appserver
+
+
+ADD A NETWORK TO A SERVICE - ROLLING BACK NETWORK UPDATE
+=======================
+docker service update --network-rm n1 appserver
+
+
+DOCKER STACK
+============
+
+docker stack deploy -c stack1.yml myapp
+docker stack ls 
+docker stack ps myapp
+docker stack rm myapp
+docker service scale myapp=2
+docker service update --image mysql:8 mydb
+
+
+---
+version: '3.8'
+services:
+  adminer:
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ghost_pod
+  lables:
+    app: CMS
+    author: Prasad
+spec:
+  containers:
+    - name: ghost
+      image: ghost
+      ports:
+       - containerPort: 2368
+         hostPort: 7777
+      env:
+       - name: NODE_ENV
+         value: development
+...
+
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: httpd-rc
+  labels:
+    type: webserver
+    author: Prasad
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: httpd-pod
+      labels:
+        type: webserver
+   spec:
+      containers:
+        - name: myhttpd
+          image: httpd
+          ports:
+            - containerPort: 80
+              hostPort: 8080
+...
+
+
+gcloud compute firewall rules create firewall1 --allow tcp:8080
+gcloud compute firewall-rules create firewall1 --allow tcp:8080
+
+
+
+
+
+gcloud config set project [PROJECT_ID]
+
+658ddf4f24054ba1942e8790da7a48d5
+
+
+/home/ubuntu/.jenkins/workspace/Testing
+
+
+https://481428124263.signin.aws.amazon.com/console
+
+https://prasad222.signin.aws.amazon.com/console
+
+
+
+
